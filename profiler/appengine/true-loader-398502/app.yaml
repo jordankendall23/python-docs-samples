@@ -6,4 +6,4 @@ handlers:
   upload: static/html/index.html
 
 - url: /css
-  static_dir: static/css 
+  static_dir: static/css  
