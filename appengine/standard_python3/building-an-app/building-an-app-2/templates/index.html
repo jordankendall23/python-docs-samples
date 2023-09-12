@@ -20,17 +20,47 @@
   <title>Datastore and Firebase Auth Example</title>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>// Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsui4TYHfS-4KGRja38Q0te1HX6EKZkDc",
+    authDomain: "first-pytho-application.firebaseapp.com",
+    projectId: "first-pytho-application",
+    storageBucket: "first-pytho-application.appspot.com",
+    messagingSenderId: "838486507286",
+    appId: "1:838486507286:web:307450d6caecf23556da37",
+    measurementId: "G-RPNHMYXZEP"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 </head>
+
 <body>
 
   <h1>Datastore and Firebase Auth Example</h1>
-  <!-- [START gae_python38_datastore_print_times] -->
-  <!-- [START gae_python3_datastore_print_times] -->
-  <h2>Last 10 visits</h2>
-  {% for time in times %}
-    <p>{{ time['timestamp'] }}</p>
-  {% endfor %}
-  <!-- [END gae_python3_datastore_print_times] -->
-  <!-- [END gae_python38_datastore_print_times] -->
+  <!-- [START gae_python38_auth_firebase_html] -->
+  <div id="firebaseui-auth-container"></div>
+  
+  <button id="sign-out" hidden=true>Sign Out</button>
+  
+  <div id="login-info" hidden=true>
+    <h2>Login info:</h2>
+    {% if user_data %}
+      <dl>
+        <dt>Name</dt><dd>{{ user_data['name'] }}</dd>
+        <dt>Email</dt><dd>{{ user_data['email'] }}</dd>
+        <dt>Last 10 visits</dt><dd>
+    {% for time in times %}
+            <p>{{ time['timestamp'] }}</p>
+          {% endfor %} </dd>
+      </dl>
+    {% elif error_message %}
+      <p>Error: {{ error_message }}</p>
+    {% endif %}
+  </div>
+  <!-- [END gae_python38_auth_firebase_html] -->
 </body>
 </html>
